@@ -4,9 +4,11 @@
 from colorsys import hls_to_rgb
 from PIL import Image, ImageDraw, ImageFilter
 
-def make(info, color, path):
+def make(info, color, path, bg_alpa=False):
     print('Color :', str(color))
     im = Image.new("RGB", (420, 420), (0xf0, 0xf0, 0xf0)) # 画像作成
+    if bg_alpa:
+        im.putalpha(0)
     draw = ImageDraw.Draw(im)
     # 描画
     for x in range(5):

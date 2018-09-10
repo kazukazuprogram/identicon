@@ -20,6 +20,7 @@ elif len(argv) < 2 or argv[1][:2] == '--':
 else:
     username = argv[1]
     print('Make user "'+username+'"\'s Identicon.')
+
 h = md5()
 h.update(username.encode())
 hash = h.hexdigest()
@@ -77,4 +78,10 @@ else:
     path_hash.update((str(t.tm_year)+str(t.tm_mon)+str(t.tm_mday)+str(t.tm_hour)+str(t.tm_min)+str(t.tm_sec)+str(t.tm_wday)+str(t.tm_yday)+str(t.tm_isdst)).encode())
     path = username + '_identicon_'+path_hash.hexdigest()[:8]+'.png'
 
-makeimage.make(info=info, color=color, path=path)
+# 透過情報の設定
+if '--alpha' in argv:
+    bg_alpa = True
+else:
+    bg_alpa = False
+
+makeimage.make(info=info, color=color, path=path, bg_alpa=bg_alpa)
