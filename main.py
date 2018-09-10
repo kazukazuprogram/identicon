@@ -8,11 +8,18 @@ import makeimage
 from colorsys import hls_to_rgb
 from time import localtime
 
-if len(argv) < 2 or argv[1][:2] == '--':
+if '--random' in argv:
+    t = localtime()
+    hash = md5()
+    hash.update((str(t.tm_year)+str(t.tm_mon)+str(t.tm_mday)+str(t.tm_hour)+str(t.tm_min)+str(t.tm_sec)+str(t.tm_wday)+str(t.tm_yday)+str(t.tm_isdst)).encode())
+    username = hash.hexdigest()
+    print('Make random Identicon.')
+elif len(argv) < 2 or argv[1][:2] == '--':
     username = input('Username : ')
+    print('Make user "'+username+'"\'s Identicon.')
 else:
     username = argv[1]
-print('Make user "'+username+'"\'s Identicon.')
+    print('Make user "'+username+'"\'s Identicon.')
 h = md5()
 h.update(username.encode())
 hash = h.hexdigest()
