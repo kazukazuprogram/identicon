@@ -16,6 +16,8 @@ def make(info, color, path):
             if info[y][x]:
                 draw.rectangle((px, py, px+70, py+70), fill=color)
     # 表示/保存
-    # im.show()
-    im.save(path, quality=95)
-    print('Saved image to', path)
+    if len(path) == 0:
+        im.show()
+    else:
+        im.save(path, quality=95)
+        print('Saved image to', path)

@@ -8,11 +8,12 @@ import makeimage
 from colorsys import hls_to_rgb
 from time import localtime
 
-h = md5()
-if len(argv) < 2:
+if len(argv) < 2 or argv[1][:2] == '--':
     username = input('Username : ')
 else:
     username = argv[1]
+print('Make user "'+username+'"\'s Identicon.')
+h = md5()
 h.update(username.encode())
 hash = h.hexdigest()
 print('Hash :', hash)
@@ -58,8 +59,10 @@ for x in range(3):
     color[x] = int(color[x])
 # タプルに変換
 color = tuple(color)
-
-if '--path' in argv and argv.index('--path')+1 < len(argv):
+if '--view-only' in argv:
+    print('View only, not save.')
+    path = ''
+elif '--path' in argv and argv.index('--path')+1 < len(argv):
     path = argv[argv.index('--path')+1]
 else:
     t = localtime()
